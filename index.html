@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <div id="popup" class="popup">
+        <h2 class="popup-name"></h2>
+        <p class="popup-info"></p>
+    </div>
+    
+<head>
+  <link href="https://cdn.fontcdn.ir/Font/Vazir/vazir.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شجرنامه دیجیتال خاندان جلیل زاده</title>
+  <style>
+    body {
+      font-family: 'Vazir', Arial, sans-serif;
+      color: #ffffff;
+      text-align: center;
+      background-color: #2b2b2b;
+    }
+
+    .container {
+      position: relative;
+      display: inline-block;
+    }
+
+    #familyTree {
+      width: 1200px;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+      border: 5px solid #ffffff;
+    }
+
+    .clickable {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 0, 0, 0);
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+
+    .clickable:hover {
+      background-color: rgba(255, 0, 0, 0.2);
+    }
+
+    .popup {
+    position: absolute;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    max-width: 250px;
+    z-index: 100;
+    display: none;
+    font-family: 'Vazir', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: justify;
+    color: #333;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup .popup-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.popup .popup-name .highlight {
+    color: #004e0d; /* آبی برای تمایز */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.popup .popup-info {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+}
+    .popup img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>شجرنامه دیجیتال خاندان جلیل زاده</h1>
+  <div class="container">
+    <img src="Jalilzadeh-Family-Tree.png" id="familyTree" alt="شجرنامه خانوادگی">
+  </div>
+
+  <div id="popup" class="popup"></div>
+
+  <script>
+    window.onload = function() {
+      const img = document.getElementById('familyTree');
+      const container = document.querySelector('.container');
+      const popup = document.getElementById('popup');
+
+      const originalWidth = 804;
+      const originalHeight = 1146.63;
+
+      // افزودن مسیر عکس و توضیحات بیشتر
+      const familyMembers = [
+        { 
+          name: "کورش", 
+          x: 367, 
+          y: 210, 
+          info: "فرزند مرحوم عبدالرزاق و استاد دانشگاه", 
+          image: "images/koorosh.jpg" 
+        },
+        { 
+          name: "خسرو", 
+          x: 345, 
+          y: 263, 
+          info: "فرزند مرحوم عبدالرزاق و پزشک", 
+          image: "images/khosro.jpg" 
+        },
+        { 
+          name: "داریوش", 
+          x: 385, 
+          y: 262, 
+          info: "فرزند مرحوم عبدالرزاق و مهندس عمران", 
+          image: "images/dariush.jpg" 
+        },
+        { 
+          name: "آرشان", 
+          x: 395, 
+          y: 229, 
+          info: "فرزند داریوش ", 
+          image: "images/arshan.jpg" 
+        },
+        { 
+          name: "عبدالرضا",
+          x: 556,
+          y: 456,
+          info: "فرزند مرحوم حاج عزیز - متولد 12 مرداد 1343 - متاهل - زادگاه خرمشهر - محل زندگی شیراز - دارای دو پسر به نام های غلامعلی و عمادالدین - دکوراسون داخلی و نقاش",
+          image: "images/Abd-Reza-Aziz-1402.jpeg"
+        },
+        { 
+          name: "عمادالدین",
+          x: 606,
+          y: 414,
+          info: "فرزند عبدالرضا - متولد 14 مهر 1366 - متاهل - زادگاه شیراز - محل زندگی شیراز - دارای یک پسر به نام هوراد(محمد مهدی) و یک دختر به نام هورناز -مدرک تحصیلی کارشناسی مهندسی مکانیک کارمند وزارت دفاع و پشتیبانی نیروهای مسلح مشغول به کار در صنایع تسلیحاتی صنایع فجر شیراز",
+          image: "images/Emad.jpeg"
+        },
+        { 
+          name: "هوراد",
+          x: 613,
+          y: 376,
+          info: "فرزند عمادالدین - متولد 26 اردیبهشت 1395 - زادگاه شیراز - محل زندگی شیراز",          
+          image: "images/Hoorad-1403.jpeg"
+        },
+        { 
+          name: "هورناز",
+          x: 623,
+          y: 395,
+          info: "فرزند عمادالدین - متولد 20 خرداد 1399 - زادگاه شیراز - محل زندگی شیراز",          
+          image: "images/Hoornaz-1403.jpeg"
+        },
+        { 
+          name: "عارف",
+          x: 539,
+          y: 375,
+          info: "فرزند علیرضا - متولد 10 شهریور 1369 - متاهل - زادگاه شیراز - محل زندگی شیراز- مهندس تکنولوژی ساخت و تولید",
+          image: "images/Aref-1403.jpeg"
+        },
+        {
+          name: "عقیل",
+          x: 567,
+          y: 348,
+          info: "فرزند علیرضا - متولد 1 خرداد 1368 - متاهل - زادگاه شیراز - محل زندگی شیراز - پدر رایان - مهندس ساختمان - HSC شرکت گاز",
+          image: "images/Aghil-1403.jpeg"
+        },
+        {
+          name: "رایان",
+          x: 561,
+          y: 314,
+          info: "فرزند عقیل - متولد 7 آبان 1398 - زادگاه شیراز - محل زندگی شیراز",
+          image: "images/Rayan-1403.jpeg"
+        },
+        { 
+          name: "محمدرضا",
+          x: 558,
+          y: 497,
+          info: "فرزند مرحوم حاج عزیز - متولد ** ** **** - متاهل - زادگاه خرمشهر - محل زندگی تهران - دارای یک پسر به نام کیومرث متولد 1370 و یک دختر به نام فروغ متولد 1372 - دکورسیون داخلی ، صنایع چوب و رشته تخصصی معرق",
+          image: "images/Mohammad-Reza-Aziz-1403.jpeg"
+        },
+        { 
+          name: "فرهاد",
+          x: 678,
+          y: 688,
+          info: "فرزند مرحوم حاج محمود - متولد 10 مرداد 1340 - متاهل - زادگاه خرمشهر - محل زندگی اهواز - دارای یک پسر به نام حسین (مهدی)- بازنشسته اداره غله اهواز",
+          image: "images/ .jpeg"
+        },
+        { 
+          name: "محسن",
+          x: 746,
+          y: 635,
+          info: "فرزند فریدون - متولد 12 بهمن 1362 - متاهل - زادگاه اهواز - محل زندگی اهواز - دارای دو پسر به نام های متین و مهیار - دکوراسیون داخلی و صنایع چوب",
+          image: "images/ .jpeg"
+        },
+        {
+          name: "یزدان",
+          x: 143,
+          y: 413,
+          info: "فرزند بیژن - متولد 4 شهریور 1380 - مجرد - زادگاه اهواز - محل زندگی اهواز - فیلم بردار - تدوین گر",
+          image: "images/Yazdan-1403.jpeg"
+        },
+        {
+          name: "علی",
+          x: 424,
+          y: 549,
+          info: "فرزند مرحوم عبدالمجید - متولد 20 شهریور 1367 - مجرد - زادگاه بندرعباس - محل زندگی شیراز - نصب ، تعمیر و نگهداری دستگاه های تصفیه آب صنعتی",
+          image: "images/Ali-Majid-1403.jpeg"
+        },
+        {
+          name: "حسن (عادل)",
+          x: 457,
+          y: 481,
+          info: "فرزند مرحوم عبدالمجید - متولد ** ماه ** - مجرد - زادگاه بندرعباس - محل زندگی شیراز - کارمند شرکت نفت جزیره سیری",
+          image: "images/Adel-Majid-1403.jpeg"
+        },
+        {
+          name: "مجید",
+          x: 143,
+          y: 809,
+          info: "فرزند سیامک - متولد 30 شهریور 1364 - متاهل - زادگاه شادگان - محل زندگی اهواز - کارمند پتروشیمی",
+          image: "images/Majid-Siyamak-1400.jpeg"
+        },
+        {
+          name: "امید",
+          x: 576,
+          y: 592,
+          info: "فرزند جواد - متولد 20 مهر 1357 - متاهل - زادگاه خرمشهر - محل زندگی شیراز - شغل آزاد ، عکاس و فیلمبردار - نام همسر: سحر میرزایی بهبهانی - دارای دو پسر به نام های ایلیا متولد 3 مرداد 1385 - شیراز و مهراد متولد 6 دی 1390 - شیراز",
+          image: "images/Omid-Javad-1403.jpeg"
+        },
+      ];
+
+
+    const scaleX = img.clientWidth / originalWidth;
+    const scaleY = img.clientHeight / originalHeight;
+
+    let currentPopup = null;
+
+    familyMembers.forEach(member => {
+      const clickableArea = document.createElement('div');
+      clickableArea.className = 'clickable';
+
+      clickableArea.style.left = `${(member.x * scaleX) - 20}px`;
+      clickableArea.style.top = `${(member.y * scaleY) - 20}px`;
+
+      clickableArea.addEventListener('click', (event) => {
+        event.stopPropagation();
+
+        // بستن پاپ‌آپ قبلی با انیمیشن
+        if (currentPopup) {
+          currentPopup.style.animation = 'fadeOut 0.5s forwards';
+        }
+
+        // بعد از پایان انیمیشن بستن پاپ‌آپ قبلی، پاپ‌آپ جدید را باز می‌کنیم
+        setTimeout(() => {
+          popup.style.left = `${event.pageX + 15}px`;
+          popup.style.top = `${event.pageY + 15}px`;
+
+          // افزودن تصویر و توضیحات
+          popup.innerHTML = 
+            `<img src="${member.image}" alt="${member.name}">
+             <strong class="member-name">${member.name}</strong><br>
+             ${member.info.replace(/\n/g, '<br>')}`;
+          popup.style.display = 'block';
+          popup.style.animation = 'fadeIn 0.5s forwards';
+
+          currentPopup = popup;
+        }, 500);
+      });
+
+      container.appendChild(clickableArea);
+    });
+
+    document.addEventListener('click', () => {
+      if (currentPopup) {
+        currentPopup.style.animation = 'fadeOut 0.5s forwards';
+        setTimeout(() => {
+          currentPopup.style.display = 'none';
+          currentPopup = null;
+        }, 500);
+      }
+    });
+  };
+</script>
+
+<style>
+  /* انیمیشن بستن پاپ‌آپ */
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  /* انیمیشن باز شدن پاپ‌آپ */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* استایل پاپ‌آپ */
+  #popup {
+    position: absolute;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  /* استایل رنگ اسامی */
+  .member-name {
+    color: #520032; /* رنگ آبی */
+    font-size: 16px; /* اندازه فونت */
+    font-weight: bold; /* ضخیم کردن متن */
+  }
+</style>
+</body>
+</html>
